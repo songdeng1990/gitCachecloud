@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sohu.cache.dao.MachineDao">
+    <sql id="machine_info_columns">
+        ssh_user,ssh_passwd,ip,room,mem,cpu,`virtual`,real_ip,service_time,fault_count,warn,available,type,groupId,extra_desc,collect,installed,machine_groupId
+    </sql>
+
+    <sql id="machine_info_fields">
+        #{sshUser},#{sshPasswd},#{ip},#{room},#{mem},#{cpu},#{virtual},#{realIp},#{serviceTime},
+        #{faultCount},#{warn},#{available},#{type},#{groupId},#{extraDesc},#{collect},#{installed},#{machineGroupId}
+    </sql>
+
+    <!--返回所有可用的机器资源-->
+    <select id="getAllMachines" resultType="MachineInfo">
+        select
+        id, modify_time, <include refid="machine_info_columns"/>
+        from machine_info
+        where available = 1
+    </select>
+
+    <select id="getMachineGroups" resultType="String">
+        select name
+        from machine_group
+    </select>
+
+    <!--通过ip查找机器-->
+    <select id="getMachineInfoByIp" resultType="MachineInfo">
+        select
+          id, modify_time, <include refid="machine_info_columns"/>
+        from machine_info
+        where ip = #{ip};
+    </select>
+    
+    <!--通过ip查找机器-->
+    <select id="getMachineInfoByConditions" resultType="MachineInfo">
+        select
+          i.id, i.modify_time, i.ssh_user,i.ssh_passwd,i.ip,i.room,i.mem,i.cpu,i.`virtual`,i.real_ip,i.service_time,
+          i.fault_count,i.warn,i.available,i.type,i.groupId,i.extra_desc,i.collect,i.installed,
+          g.name as groupName
+        from machine_info i left join machine_group g on i.machine_groupId = g.id
+        <where>
+            <if test="ipLike != '' and ipLike != null">
+                and i.ip like '%${ipLike}%'
+            </if>
+            <if test="extraDesc != '' and extraDesc != null">
+                and i.extra_desc like '%${extraDesc}%'
+            </if>
+            <if test="groupName != '' and groupName != null">
+                and g.name like '%${groupName}%'
+            </if>
+            and i.available = 1
+        </where>
+        limit ${start},${size}
+    </select>
+
+
+    <select id="countMachine" resultType="int">
+        select count(*)
+        from machine_info i left join machine_group g on i.machine_groupId = g.id
+        <where>
+            <if test="ipLike != '' and ipLike != null">
+                and i.ip like '%${ipLike}%'
+            </if>
+            <if test="extraDesc != '' and extraDesc != null">
+                and i.extra_desc like '%${extraDesc}%'
+            </if>
+            <if test="groupName != '' and groupName != null">
+                and g.name like '%${groupName}%'
+            </if>
+            and i.available = 1
+        </where>
+    </select>
+
+    <!--保存机器信息-->
+    <insert id="saveMachineInfo" parameterType="MachineInfo">
+        insert into machine_info
+          (<include refid="machine_info_columns"/>)
+        values
+          (<include refid="machine_info_fields"/>)
+        on duplicate key 
+        update ssh_user=#{sshUser},ssh_passwd=#{sshPasswd},room=#{room},mem=#{mem},cpu=#{cpu},
+        `virtual`=#{virtual},real_ip=#{realIp},service_time=#{serviceTime},fault_count=#{faultCount},
+        warn=#{warn},available=#{available},type=#{type},groupId=#{groupId},extra_desc=#{extraDesc},collect=#{collect},machine_groupId=#{machineGroupId}
+    </insert>
+    
+    <!--根据ip删除一台机器的信息:置无效-->
+    <update id="removeMachineInfoByIp" parameterType="string">
+        update machine_info set available = 0 WHERE ip = #{ip}
+    </update>
+    
+    <!--通过type查找机器-->
+    <select id="getMachineInfoByType" resultType="MachineInfo">
+        select
+          id, modify_time, <include refid="machine_info_columns"/>
+        from machine_info where type = #{type} and available = 1
+    </select>
+    
+    <!-- 更新机器类型 -->
+    <update id="updateMachineType">
+    	update machine_info set type = #{type} where id = #{id}
+    </update>
+    
+    <!-- 设置安装redis标志位 -->
+    <update id="setRedisInstalled">
+    	update machine_info set installed = 1 where ip = #{ip}
+    </update>
+
+    <!--通过type查找机器-->
+    <select id="getAllRoom" resultType="MachineRoom">
+        select id, name from idc
+    </select>
+
+    <select id="getGroupIdByName" resultType="Long">
+        select id from machine_group where name = #{name}
+    </select>
+
+</mapper>

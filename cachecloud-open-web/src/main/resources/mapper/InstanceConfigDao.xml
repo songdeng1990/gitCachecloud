@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sohu.cache.dao.InstanceConfigDao">
+    <sql id="columns">
+    	config_key, config_value, info, update_time, type, status, template_id
+    </sql>
+
+    <select id="getByType" resultType="com.sohu.cache.entity.InstanceConfig">
+        select id,<include refid="columns"/> from instance_config where type = #{type}
+    </select>
+
+    <select id="getByTemplateId" resultType="com.sohu.cache.entity.InstanceConfig">
+        select id,<include refid="columns"/> from instance_config where template_id = #{templateId}
+    </select>
+    
+    <select id="getById" resultType="com.sohu.cache.entity.InstanceConfig">
+        select id,<include refid="columns"/> from instance_config where id = #{id}
+    </select>
+    
+    <select id="getByConfigKeyAndType" resultType="com.sohu.cache.entity.InstanceConfig">
+        select id,<include refid="columns"/> from instance_config where config_key = #{configKey} and type = #{type}
+    </select>
+    
+    <select id="getAllInstanceConfig" resultType="com.sohu.cache.entity.InstanceConfig">
+        select id,<include refid="columns"/> from instance_config
+    </select>
+    
+    
+    <insert id="saveOrUpdate">
+		insert into instance_config(<include refid="columns" />)
+		values(#{configKey},#{configValue},#{info},now(),#{type},#{status}, #{templateId})
+	    on duplicate key update
+	    config_value = #{configValue}, info = #{info}, type=#{type},
+	    update_time = now(),status = #{status} 
+	</insert>
+	
+	<update id="updateStatus">
+		update instance_config set status = #{status} where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from instance_config where id = #{id}
+	</delete>
+
+    <insert id="addTemplate" parameterType="ConfigTemplate" keyProperty="id" useGeneratedKeys="true">
+        insert into config_template(name, architecture, extra_desc) values(#{name}, #{architecture}, #{extraDesc});
+    </insert>
+
+    <update id="updateTemplateInfo">
+        update config_template set `name`=#{name}, `extra_desc`=#{extraDesc} where id=#{id}
+    </update>
+
+    <select id="getAllTemplate" resultType="com.sohu.cache.entity.ConfigTemplate">
+        select id,name,architecture,extra_desc from config_template
+    </select>
+
+    <select id="getTemplateByArchitecture" resultType="com.sohu.cache.entity.ConfigTemplate">
+        select id,name,architecture,extra_desc from config_template where architecture=#{architecture}
+    </select>
+
+    <select id="getTemplateById" resultType="com.sohu.cache.entity.ConfigTemplate">
+        select id,name,architecture,extra_desc from config_template where id=#{id}
+    </select>
+
+    <delete id="removeTemplateById">
+        delete from config_template where id = #{templateId}
+    </delete>
+
+    <delete id="removeTemplateConfigByTemplateId">
+        delete from instance_config where template_id = #{templateId}
+    </delete>
+</mapper>
