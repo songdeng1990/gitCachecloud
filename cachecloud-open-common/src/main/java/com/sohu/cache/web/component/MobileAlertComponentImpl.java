@@ -64,16 +64,7 @@ public class MobileAlertComponentImpl implements MobileAlertComponent {
             logger.error("发送短信失败 : url:{}", alertUrl);
         }
         logger.warn("send Done!");
-    }
-
-    public static void main(String[] args) {
-        Map<String, Object> postMap = new HashMap<String, Object>();
-        postMap.put("desc", "This is a test messge,ignore please.");
-        postMap.put("code", "151");
-        String responseStr = HttpRequestUtil.doJsonPost("http://alert.jpushoa.com/v1/alert/", JsonUtil.toJson(postMap));
-        System.out.println(responseStr);
-    }
-
+    }   
     public void setAdminPhones(String adminPhones) {
         this.adminPhones = adminPhones;
     }

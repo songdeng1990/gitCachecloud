@@ -1,13 +1,16 @@
 package com.sohu.cache.web.component;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sohu.cache.util.ConstUtils;
+import com.sohu.cache.web.util.HttpRequestUtil;
 import com.sohu.cache.web.util.MailUtil;
 
 /**
@@ -23,19 +26,17 @@ public class EmailComponentImpl implements EmailComponent {
 
     @Override
     public boolean sendMailToAdmin(String title, String content) {
-        //return MailUtil.sendMail(title, content, Arrays.asList(adminEmail));
-        return MailUtil.sendMail(title, content, Arrays.asList("dengsong@jpush.cn"));
+        return MailUtil.sendMail(title, content, Arrays.asList(adminEmail));
     }
 
     @Override
     public boolean sendMail(String title, String content, List<String> emailList) {
-        //return MailUtil.sendMail(title, content, emailList);
-        return MailUtil.sendMail(title, content, Arrays.asList("dengsong@jpush.cn"));
+       return MailUtil.sendMail(title, content, emailList);
     }
     
     @Override
 	public boolean sendMail(String title, String content, List<String> emailList, List<String> ccList) {
-       /* String alertUrl = ConstUtils.EMAIL_ALERT_INTERFACE;
+        String alertUrl = ConstUtils.EMAIL_ALERT_INTERFACE;
         if (StringUtils.isBlank(alertUrl)) {
             logger.error("emailAlertInterface url is empty!");
             return false;
@@ -57,19 +58,7 @@ public class EmailComponentImpl implements EmailComponent {
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return false;
-        }*/
-    	//emailList.addAll(ccList);
-    	
-    	//只是为了控制是否发送邮件 start
-    	String alertUrl = ConstUtils.EMAIL_ALERT_INTERFACE;
-        if (StringUtils.isBlank(alertUrl)) {
-            logger.error("emailAlertInterface url is empty!");
-            return true;
         }
-        //只是为了控制发送邮件 end
-        
-        
-    	return MailUtil.sendMail(title, content, Arrays.asList("dengsong@jpush.cn"));
 	}
 
     public void setAdminEmail(String adminEmail) {

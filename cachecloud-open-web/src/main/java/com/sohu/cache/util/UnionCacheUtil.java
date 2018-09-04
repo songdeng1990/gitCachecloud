@@ -111,7 +111,6 @@ public class UnionCacheUtil {
             //parameter.put("bucket","defalut");
             parameter.put("userName","default");
             parameter.put("password","default");
-            //parameter.put("authUserInfo","dengsong@jpush.cn");
             
             parameter.put("nodesList","192.168.13.35:16401,192.168.13.36:16381");
             String test="http://172.16.6.38:8080";

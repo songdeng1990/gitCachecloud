@@ -123,7 +123,7 @@ public class ConstUtils {
     public static String DEFAULT_SUPER_ADMIN_NAME = "loginWhenFail";
     public static String SUPER_ADMIN_NAME = DEFAULT_SUPER_ADMIN_NAME;
     
-    public static String DEFAULT_SUPER_ADMIN_PASS = "jpush_2016Admin";
+    public static String DEFAULT_SUPER_ADMIN_PASS = "cachecoud_s*72sAdmin";
     public static String SUPER_ADMIN_PASS = DEFAULT_SUPER_ADMIN_PASS;
     
     public static String DEFAULT_SUPER_ADMINS="admin";
