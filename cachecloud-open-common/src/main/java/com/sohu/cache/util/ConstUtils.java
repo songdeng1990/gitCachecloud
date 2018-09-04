@@ -302,16 +302,9 @@ public class ConstUtils {
      */
     public static final String INNER_ERROR = "cachecloud_inner_error";
 
-    //public static final String MACHINE_URL = "http://report.auras.jpushoa.com:8090/api/hosts/basicinfo";
-    //public static final String LOGIN_URL = "http://report.auras.jpushoa.com:8090/api/auth/login";
-    public static final String MACHINE_URL = "http://report.auras.jpushoa.com:12000/pluginserver/ops/idc/host";
-    public static final String LOGIN_URL = "http://report.auras.jpushoa.com:12001/user_center/v1/token/create_token";
-    public static final String USER_INFO_URL = "http://report.auras.jpushoa.com:12001/user_center/v1/user/get_user_info";
-/*    public static final String UNION_CACHE_ADD_URL = "http://bjff-consul-api.jpushoa.com/cache/group/addCacheResourceGroup";
-    public static final String UNION_CACHE_UPDATE_URL = "http://bjff-consul-api.jpushoa.com/cache/group/updateCacheResourceGroupById";
-    public static final String UNION_CACHE_CHECK_URL = "http://bjff-consul-api.jpushoa.com/cache/group/queryCacheResourceGroupById";
-    public static final String UNION_CACHE_DELETE_URL = "http://bjff-consul-api.jpushoa.com/cache/group/deleteCacheResourceGroupById";
-    public static final String UNION_CACHE_USER_URL = "http://bjff-consul-api.jpushoa.com//cache/group/synAuthInfoById";*/
+    public static final String MACHINE_URL = "http://xxxxx/host";
+    public static final String LOGIN_URL = "http://xxxxx/token/create_token";
+    public static final String USER_INFO_URL = "http://xxxxxx/user/get_user_info";
     
     public static String UNION_CACHE_ADD_URL = "/cache/group/addCacheResourceGroup";
     public static String UNION_CACHE_UPDATE_URL = "/cache/group/updateCacheResourceGroupById";
@@ -340,7 +333,7 @@ public class ConstUtils {
      * 默认开启告警
      */
     public static int DEFALT_OPEN_ALARM=1;
-    public static String CACHECLOUD_MAIL = "cachecloud@jpush.cn";
+    public static String CACHECLOUD_MAIL = "cachecloud@xxxx.cn";
     public static String CACHECLOUD_MAIL_PWD = "Cachecloud_A1sh";
     public static String CACHECLOUD_IPORTAL_PWD = "la95sASL";
     public static String DEFAULT_SYNC_TO_UNION_CACHE= "false";

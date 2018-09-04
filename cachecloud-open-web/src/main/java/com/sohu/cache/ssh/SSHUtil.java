@@ -530,14 +530,4 @@ public class SSHUtil {
 		return "0".equals(rst);
 	}
 	
-	public static void mountGlusterForRedisBackup(String host){
-		String get = "wget http://dsoft.jpushoa.com:8888/gluster-client-install.sh;sh gluster-client-install.sh %s redis-backup test";
-		if (ConstUtils.DEFAULT_IDC_NAME.contains(""))
-		try {
-			execute(host, get);
-		} catch (SSHException e) {
-			logger.error("",e);
-		}
-	}
-
 }

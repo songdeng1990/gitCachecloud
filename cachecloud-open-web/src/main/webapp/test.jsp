@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>test</title>
-    <link rel="SHORTCUT ICON" href="/resources/img/jpush.logo"/>
+    <link rel="SHORTCUT ICON" href="/resources/img/db.logo"/>
 </head>
 <body>
 	test mm monitor

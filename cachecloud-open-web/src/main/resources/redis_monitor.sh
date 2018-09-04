@@ -84,7 +84,7 @@ f_send_mobile_msg()
       
        telmsg="redis监控: ${content}"       
        errinfostr="${telmsg}"
-       SENDSTR="curl -X POST -H \"Content-Type: application/json\" -d '{\"code\":26, \"desc\": \"${errinfostr}\"}' http://alert.jpushoa.com/v1/alert/"
+       SENDSTR="curl -X POST -H \"Content-Type: application/json\" -d '{\"code\":26, \"desc\": \"${errinfostr}\"}' http://alert.xxxx.com/v1/alert/"
        eval "${SENDSTR}"
        rstcode=$?
        echo "##`date` 上报告警中心返回值 ${rstcode} ##"

@@ -62,14 +62,6 @@ public class HttpPostUtil {
         return response;
     }
     
-   public static void main(String[] args) {
-    	String rsp = sendHttpGetRequest("http://iportal.jpushoa.com/pluginserver/ops/idc/host","batch_ip=172.16.102.34");
-    	System.out.println(rsp);
-    	MachineResponseRaw raw = JSON.parseObject(rsp, MachineResponseRaw.class);
-    	MachineResponse m = raw.toMapchineResponse();
-    	System.out.println(raw.toMapchineResponse());
-	}
-    
     public static String sendHttpPostRequest(String url, String jsonString) {
 
         HttpURLConnection httpUrlConn = null;

@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>CacheCloud系统</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/login.css">
-	<link rel="SHORTCUT ICON" href="/resources/img/jpush.logo"/>
+	<link rel="SHORTCUT ICON" href="/resources/img/db.logo"/>
 	<script type="text/javascript" src="/resources/bootstrap/jquery/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript">
 		$(document).keypress(function(e) {  
