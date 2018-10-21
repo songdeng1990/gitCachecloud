@@ -6,8 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.catalina.startup.VersionLoggerListener;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.crsh.cli.impl.bootstrap.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +21,7 @@ import com.sohu.cache.redis.RedisConfigTemplateService;
 import com.sohu.cache.redis.enums.RedisClusterConfigEnum;
 import com.sohu.cache.redis.enums.RedisConfigEnum;
 import com.sohu.cache.redis.enums.RedisSentinelConfigEnum;
+import com.sohu.cache.ssh.SSHUtil;
 import com.sohu.cache.util.ConstUtils;
 
 /**
@@ -161,7 +164,7 @@ public class RedisConfigTemplateServiceImpl implements RedisConfigTemplateServic
             }
             configs.add(combineConfigKeyValue(configKey, configValue));
         }
-        addConstantConfig(host, configs);
+        handleSpecialConfig(host, configs);
         
         return configs;
     }
@@ -196,7 +199,7 @@ public class RedisConfigTemplateServiceImpl implements RedisConfigTemplateServic
             }
             configs.add(combineConfigKeyValue(configKey, configValue));
         }
-        addConstantConfig(sentinelHost, configs);
+        handleSpecialConfig(sentinelHost, configs);
         return configs;
     }
 
@@ -226,7 +229,7 @@ public class RedisConfigTemplateServiceImpl implements RedisConfigTemplateServic
 
         }
         
-        addConstantConfig(host, configs);
+        //addConstantConfig(host, configs);
         return configs;
     }
     
@@ -250,7 +253,7 @@ public class RedisConfigTemplateServiceImpl implements RedisConfigTemplateServic
             }
         }
         
-        addConstantConfig(host, configs);
+        handleSpecialConfig(host, configs);
         return configs;
     }
 
@@ -294,22 +297,62 @@ public class RedisConfigTemplateServiceImpl implements RedisConfigTemplateServic
      * @param host
      * @param configList
      */
-    private void addConstantConfig(String host,List<String> configList){
+    private void handleSpecialConfig(String host,List<String> configList){
     	//remove old bind value
     	Iterator<String> configItrator = configList.iterator();
     	while (configItrator.hasNext())
     	{
+    		
     		String keyValuePair = configItrator.next();
     		String keyName = keyValuePair.split(ConstUtils.SPACE)[0];
     		if (keyName.equals(RedisConfigEnum.BIND.getKey()) || keyName.equals(RedisConfigEnum.DAEMONIZE.getKey()))
     		{
     			configItrator.remove();   			
-    		}    		
+    		}
+    		
+    		
+    		//为了兼容3.0.x 版本加入已有的redis cluster集群，对procted_mode 做如下特殊配置
+    		if (keyName.equals(RedisConfigEnum.PROCTED_MODE.getKey())){
+    			String version = SSHUtil.getRedisVersion(host);
+    			if (versionLessThan(version, "3.2.0")){
+    				configItrator.remove();
+    			}
+    		}
     	}
     	
     	configList.add(combineConfigKeyValue(RedisConfigEnum.BIND.getKey(), host + " 127.0.0.1"));
     	configList.add(combineConfigKeyValue(RedisConfigEnum.DAEMONIZE.getKey(), "no"));
     }
+    
+    /**
+     * return v1<v2
+     * @param v1
+     * @param v2
+     * @return
+     */
+    private boolean versionLessThan(String v1,String v2){
+    	
+            if (v1.trim().equals(v2)) {
+                return false;
+            }
+            String[] version1Array = v1.split("[._]");
+            String[] version2Array = v2.split("[._]");
+            int minLen = Math.min(version1Array.length, version2Array.length);
+            
+            for (int i=0;i<minLen;i++){
+            	int v1Num = Integer.parseInt(version1Array[i]);
+            	int v2Num = Integer.parseInt(version2Array[i]);
+            	if (v1Num == v2Num){
+            		continue;
+            	}else{
+            		return v1Num < v2Num;          		
+            	}
+            }
+            
+            return false;
+    }
+    
+    
 
     @Override
     public int updateTemplateInfo(int id, String name, String extraDesc) {

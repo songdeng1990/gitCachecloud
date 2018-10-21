@@ -73,9 +73,9 @@ public class SSHTemplate {
     public Result execute(String ip, int port, String username, String password, 
     		SSHCallback callback) throws SSHException{
         Connection conn = null;
-        MachineInfo info = self.machineDao.getMachineInfoByIp(ip);
+        //MachineInfo info = self.machineDao.getMachineInfoByIp(ip);
         try {
-            conn = getConnection(ip, port, info.getSshUser(),info.getSshPasswd());
+            conn = getConnection(ip, port, username,password);
             return callback.call(new SSHSession(conn, ip+":"+port));
         } catch (Exception e) {
             throw new SSHException("SSH err: " + ip + " " + e.getMessage(), e);

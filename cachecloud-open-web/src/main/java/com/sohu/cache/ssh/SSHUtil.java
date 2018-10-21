@@ -50,7 +50,7 @@ public class SSHUtil {
 	private final static String MEM_CACHED = "Cached";
 
 	// 使用 @SSHTemplate 重构SSHUtil
-	private final static SSHTemplate sshTemplate = new SSHTemplate();
+	private static SSHTemplate sshTemplate = new SSHTemplate();
 
 	/**
 	 * Get HostPerformanceEntity[cpuUsage, memUsage, load] by ssh.<br>
@@ -404,18 +404,34 @@ public class SSHUtil {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static String getRedisVersion(String ip){
+		try {
+			String getRedisVersion = ConstUtils.CACHECLOUD_BASE_DIR + "/bin/redis-server --version | awk '{print $3}' | awk -F= '{print $2}'";
+			
+			String redisVersion = SSHUtil.execute(ip, getRedisVersion);
+			return redisVersion;
+		} catch (SSHException e) {
+			// TODO Auto-generated catch block
+			throw new RuntimeException(e);
+		}
+	}
 
 	public static void main(String[] args) {
 		try {
-			String rs = execute("192.168.13.35", 8220, "root", "root", "ls -t " + "/opt/redis/backup/10008");
-			// System.out.println(rs);
+			//sshTemplate = new SSHTemplate();
+//			String getRedisVersion = ConstUtils.CACHECLOUD_BASE_DIR + "/bin/redis-server --version | awk '{print $3}' | awk -F= '{print $2}'";
+//			String rs = execute("192.168.56.101", 22, "redis", "redis", getRedisVersion);
+			ConstUtils.USERNAME="redis";
+			ConstUtils.PASSWORD="redis";
+			System.out.println(getRedisVersion("192.168.56.101"));
 			// return;
 
-			String[] array = rs.split("\\s");
-			for (String line : array) {
-				line = StringUtils.trim(line);
-				System.out.print(line);
-			}
+//			String[] array = rs.split("\\s");
+//			for (String line : array) {
+//				line = StringUtils.trim(line);
+//				System.out.print(line);
+//			}
 			// System.out.println(rs);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
