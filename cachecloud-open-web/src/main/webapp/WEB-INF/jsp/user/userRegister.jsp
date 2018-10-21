@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <title>CacheCloud用户申请</title>
-	<link rel="SHORTCUT ICON" href="/resources/img/jpush.logo"/>
+	<link rel="SHORTCUT ICON" href="/resources/img/db.logo"/>
     <script type="text/javascript">
     //验证邮箱格式
     var valEmails=/^(([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.|\-]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3};){0,6}([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.|\-]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;

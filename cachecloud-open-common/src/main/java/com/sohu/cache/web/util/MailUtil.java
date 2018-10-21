@@ -28,14 +28,14 @@ import com.sohu.cache.web.component.EmailComponentImpl;
 public class MailUtil {
 	
 	 // 发件人电子邮箱
-	private static String FROM = "alert@jpush.cn";
+	private static String FROM = "from@xxx.cn";
 	
 	// 邮箱服务器地址
-	private static String HOST = "smtp.qiye.163.com";
+	private static String HOST = "dfafad.cn";
 	
-	private static String USER = "alert@jpush.cn";
+	private static String USER = "alert@xxx.cn";
 	
-	private static String PWD = "VvLNJYDh2p8R";
+	private static String PWD = "xxxxx";
 
 	private static final Logger logger = LoggerFactory.getLogger(EmailComponentImpl.class);
 	public static boolean sendMail(String title, String content, List<String> emailList) {

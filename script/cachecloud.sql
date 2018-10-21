@@ -857,10 +857,10 @@ CREATE TABLE `system_config` (
 -- init cachecloud data
 --
 
-insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.machine.ssh.name','redisapp','机器ssh用户名',1,1);
-insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.machine.ssh.password','JRds.169Clould','机器ssh密码',1,2);
+insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.machine.ssh.name','xxxxxxx','机器ssh用户名',1,1);
+insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.machine.ssh.password','xxxxxx','机器ssh密码',1,2);
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.machine.ssh.port','22','机器ssh端口',1,3);
-insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.superAdmin','dengson,zhangfp','超级管理员组',1,4);
+insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.superAdmin','xxxxx','超级管理员组',1,4);
 insert into system_config(config_key,config_value,info,status,order_id) values('machine.cpu.alert.ratio','80.0','机器cpu报警阀值',1,7);
 insert into system_config(config_key,config_value,info,status,order_id) values('machine.mem.alert.ratio','80.0','机器内存报警阀值',1,8);
 insert into system_config(config_key,config_value,info,status,order_id) values('machine.load.alert.ratio','8.0','机器负载报警阀值',1,9);
@@ -868,7 +868,7 @@ insert into system_config(config_key,config_value,info,status,order_id) values('
 insert into system_config(config_key,config_value,info,status,order_id) values('machine.disk.alert.ratio','80.0','磁盘报警阀值',1,6);
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.documentUrl','http://cachecloud.github.io','文档地址',1,10);
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.owner.email','xx@sohu.com,yy@qq.com','邮件报警(逗号隔开)',1,11);
-insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.owner.phone','13812345678,13787654321','手机号报警(逗号隔开)',1,12);
+insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.owner.phone','xxxxxxx','手机号报警(逗号隔开)',1,12);
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.mavenWareHouse','http://your_maven_house','maven仓库地址(客户端)',1,13);
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.contact','user1:(xx@zz.com, user1:135xxxxxxxx)<br/>user2: (user2@zz.com, user2:138xxxxxxxx)','值班联系人信息',1,14);
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.good.client','1.0-SNAPSHOT','可用客户端版本(用逗号隔开)',1,15);
@@ -881,7 +881,7 @@ insert into system_config(config_key,config_value,info,status,order_id) values('
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.base.dir','/opt/redis','cachecloud根目录，要和cachecloud-init.sh脚本中的目录一致',1,21);
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.app.client.conn.threshold','2000','应用连接数报警阀值',1,22);
 
-insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.mobile.alert.interface','http://alert.jpushoa.com/v1/alert/','短信报警接口(说明:http://cachecloud.github.io 邮件和短信报警接口规范)',1,24);
+insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.mobile.alert.interface','xxxxxx','短信报警接口(说明:http://cachecloud.github.io 邮件和短信报警接口规范)',1,24);
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.ldap.url','','LDAP接口地址(例如:ldap://ldap.xx.com)',1,25);
 
 insert into system_config(config_key,config_value,info,status,order_id) values('cachecloud.whether.schedule.clean.data','false','是否定期清理统计数据',1,26);
@@ -921,11 +921,6 @@ CREATE TABLE `app_data_migrate_status` (
   `config_path` varchar(255) NOT NULL COMMENT '配置文件路径',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='迁移状态';
-
-insert into app_user(name,ch_name,email,mobile,type) values('dengsong','邓松','dengsong@jpush.cn','13532916674',0);
-insert into app_user(name,ch_name,email,mobile,type) values('zhangfp','张飞鹏','zhangfp@jpush.cn','13798267966',0);
-insert into app_user(name,ch_name,email,mobile,type) values('loginWhenFail','admin','admin@xxx.cn','13500000000',0);
-
 
 
 CREATE TABLE `instance_config` (

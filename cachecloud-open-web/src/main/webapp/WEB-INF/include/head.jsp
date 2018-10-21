@@ -29,7 +29,7 @@
 
 <link href="/resources/js/prettify.css" rel="stylesheet"/>
 <script type="text/javascript" src="/resources/js/prettify.js"></script>
-<link rel="SHORTCUT ICON" href="/resources/img/jpush.logo"/>
+<link rel="SHORTCUT ICON" href="/resources/img/db.logo"/>
 <%--<script type="text/javascript" src="/resources/js/run_prettify.js"></script>--%>
 
 

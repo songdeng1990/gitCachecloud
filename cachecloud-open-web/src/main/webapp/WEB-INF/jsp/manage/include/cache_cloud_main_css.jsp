@@ -6,4 +6,4 @@
 <link href="/resources/manage/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="/resources/manage/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="/resources/manage/plugins/data-tables/DT_bootstrap.css" rel="stylesheet" type="text/css"/>
-<link rel="SHORTCUT ICON" href="/resources/img/jpush.logo"/>
+<link rel="SHORTCUT ICON" href="/resources/img/db.logo"/>

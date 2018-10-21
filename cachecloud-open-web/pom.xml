@@ -354,16 +354,5 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<!-- <repository>
-			<id>nexus</id>
-			<name>nexus</name>
-			<url>http://maven.jpushoa.com/nexus/content/groups/public/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository> -->
 	</repositories>
 </project>

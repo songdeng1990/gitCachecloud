@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>采样校验源数据和目标数据</title>
-	<link rel="SHORTCUT ICON" href="/resources/img/jpush.logo"/>
+	<link rel="SHORTCUT ICON" href="/resources/img/db.logo"/>
 </head>
 	<body STYLE="BACKGROUND-COLOR:#000;color:#FFF">
 		<c:forEach items="${checkDataResultList}" var="line">
